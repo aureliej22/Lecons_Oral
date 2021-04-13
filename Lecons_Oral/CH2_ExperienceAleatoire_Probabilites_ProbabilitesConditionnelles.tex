@@ -2,8 +2,24 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[francais]{babel}
-\usepackage{amsmath}
+\usepackage{amsmath,amsfonts,amssymb}
+
 \usepackage{fullpage}
+\usepackage[amsthm]{ntheorem}
+
+\newtheorem{Ex}{Exemple}[section]
+\newtheorem{Proof}{Démonstration}[section]
+\theoremstyle{theorem}
+\newtheorem{Th}{Théorème}[section]
+\theoremstyle{definition}
+\newtheorem{Propriete}{Propriété}[section]
+\theoremstyle{definition}
+\newtheorem{Propos}{Proposition}[section]
+\theoremstyle{definition}
+\newtheorem{Def}{Définition}[section]
+
+\linespread{1.1}
+
 
 \title{CHAPITRE 2 : Expérience Aléatoire, probabilités, probabilités conditionnelles}
 \author{Aurélie \textsc{Jeanmougin}}
@@ -13,7 +29,127 @@
 	\maketitle
 
 \section{Expérience aléatoire et évènements}
-\subsection{Expérience aléatoire}
+	\subsection{Expérience aléatoire}
+		\begin{Def}
+			Une \textbf{expérience aléatoire} est une expérience renouvelable à l'identique, dont ls résultats possibles sont connus sans qu'on puisse déterminer lequel sera réalisé.
+		\end{Def}
+	
+		\begin{Ex}
+			Lancer un dé à 6 faces est une expérience renouvelable dont les résultats possibles sont tous les nombre entiers de 1 à 6.
+		\end{Ex}
+	
+		\begin{Def}
+			Les résultats possibles d'une expérience aléatoire sont appelés \textbf{éventualités} ou \textbf{issues}.
+		\end{Def}
+	
+		\begin{Def}
+			L'ensemble de toutes les issues d'une expérience aléatoire est appelé \textbf{univers}. On le note généralement $\Omega$.
+		\end{Def}
+		
+		\begin{Ex}
+			On peut reprendre l'exemple précédent : l'ensemble de toutes les issues de cette expérience aléatoire est $\Omega = \{1,2,3,4,5,6\}$.
+		\end{Ex}
+	
+	Dans cette leçon on peut se limiter au cas où $\Omega$ est un ensemble fini.
+	
+	\subsection{Evénement}
+		
+		Un événement est associé à une expérience aléatoire, nous allons donner quelques définitions.
+		
+		\begin{Def}
+			\begin{itemize}
+				\item Un \textbf{événement} est un ensemble de plusieurs issues, c'est un sous-ensemble de $\Omega$.
+				\item Un événement est dit \textbf{élémentaire} si une seule issue le réalise.
+				\item L'\textbf{événement impossible} est la partie vide (noté $\emptyset$), lorsque aucune issue ne le réalise.
+				\item L'\textbf{événement certain} est $\Omega$, lorsque toutes les issues le réalisent.
+				\item L'\textbf{événement $A\cup B$} (lu "A union B") est constitué des issues qui appartiennent soit à A, soit à B, soit aux deux ensembles.
+				\item L'\textbf{événement $A\cap B$} (lu "A inter B") est constitué des issues qui appartiennent à la fois à A et à B.
+				\item Deux événements sont \textbf{incompatibles} s'ils n'ont pas l'éléments en commun, c'est-à-dire que $A\cap B = \emptyset$.
+				\item L'événement $\bar{A}$ est dit \textbf{événement contraire} de A si les deux événements sont incompatibles et si l'union des deux événements forme la totalité des issues, c'est-à-dire que $A\cup \bar{A} = \Omega$ et $A\cap B = \emptyset$.
+			\end{itemize}		
+		\end{Def}
 
+		\begin{Ex}
+			1. Obtenir un 2 est un événement élémentaire : $\omega = \{7\}$. \\
+			2. Obtenir un nombre pair est un événement : $A = \{2,4,6\}$. \\
+			3. Obtenir un multiple de trois est un événement : $B = \{3,6\}$. \\
+			4. $A\cap B = \{6\}$. \\
+			5. $A\cup B = \{2,3,4,6\}$. \\
+			6. Si on a : \[C = \{1\}\] alors $C\cap A = \emptyset$ donc C et A sont incompatibles. \\
+			7. Si $\bar{A}$ est l'événement "Obtenir un nombre impair" on a : \[A\cap \bar{A} = \emptyset\]
+			\[A\cup \bar{A} = \Omega\]
+			
+		\end{Ex}
+	
+\section{Probabilités}
+	\subsection{Loi de probabilités sur un univers $\Omega$}
+	
+		\begin{Def}
+			Soit $\Omega$ l'univers d'une expérience aléatoire. On définit une loi de probabilité P sur $\Omega$ en associant à chaque événement élémentaire $\omega_{i}$ une probabilité $p_{i} \in [0,1]$ tel que :
+			\[\sum_{i}p_{i} = 1\]
+			On peut aussi noter $p_{i} = P(\omega_{i})$.
+		\end{Def}
+		
+		\begin{Propos}
+			La probabilité P(E) d'un événement E est la somme des probabilités des événements élémentaires qui le composent.
+		\end{Propos}
+	
+		\begin{Ex}
+			On joue avec un dé truqué. La probabilité d'apparition de chaque face est donnée ci-dessous: \[
+			\begin{tabular}{|c|c|c|c|c|c|c|}
+				\hline \textbf{Issue $\omega$} & 1 & 2 & 3 & 4 & 5 & 6 \\
+				\hline \textbf{Probabilité $P(\omega)$} & 0,05 & 0,2 & $\alpha$ & 0,1 & 0,25 & 0,1 \\
+				\hline
+			\end{tabular} \]
+			1. On veut calculer la probabilité de l'événement A : "Obtenir un nombre pair". D'après la définition on a :
+			\[P(A) = P(2)+P(4)+P(6) = 0,2+0,1+0,1 = 0,4.\]
+			2. On veut calculer la probabilité d'obtenir 3. On sait que :
+			\[P(1)+P(2)+P(3)+P(4)+P(5)+P(6) = 1\]
+			On a alors : 
+			\[P(3) = 1 - (P(1)+P(2)+P(4)+P(5)+P(6)) = 1-(0,05+0,2+0,1+0,25+0,1) = 0,3.\]
+		\end{Ex}
+	
+		\begin{Propriete}
+			Soient A, B $\subset \Omega$. Alors :
+			\begin{itemize}
+				\item 1. $P(\Omega) = 1$
+				\item 2. $P(\emptyset) = 0$
+				\item 3. $P(\bar{A}) = 1-P(A)$
+				\item 4. $P(A\setminus B) = P(A)-P(A\cap B)$
+				\item 5. $A\subset B \Rightarrow P(A) \leq P(B)$
+				\item 6. $P(A\cup B) = P(A)+P(B)-P(A\cap B)$
+			\end{itemize}
+		\end{Propriete}
+	
+		\begin{Proof}
+			1. $P(\Omega) = P(\bigcup_{i} \omega_{i}) = \sum_{i} P(\omega_{i}) = \sum_{i}\frac{1}{n} = 1$. \\
+			2. $P(A\cup \emptyset) = P(A) + P(\emptyset) \iff P(A) = P(A) + P(\emptyset)$. \\
+			3. On a : $A = (A\setminus B)\cup (A\cap B)$, de plus $(A\setminus B)$ et $A\cap B$ sont disjoints donc on peut appliquer la définition : 
+			\[P(A) = P(A\setminus B) + P(A\cap B)\]
+			4. Comme $A\cap \bar{A} = \emptyset$ et $A\cup \bar{A} = \Omega$, on a:
+			\[P(A\cup \bar{A}) = P(A) + P(\bar{A}) \iff P(\Omega) = P(A) + P(\bar{A})\]
+			5. $A\subset B \Rightarrow B = (B\cap A)\cup A$ donc :
+			\[P(B) = P(B\setminus A) + P(A) \leq P(A) \]
+			6. On a :
+			\[A\cup B = (A\setminus B)\cup (A\cap B)\cup (B\setminus A)\] 
+		\end{Proof}
+	
+	\subsection{Equiprobabilité}
+		\begin{Def}
+			Si tous les éléments de $\Omega$ ont la même probabilité d'apparition alors $\Omega$ est dit \textbf{équiprobable}. Si $\Omega = \{a_{1},...,a_{n}\}$ alors : 
+			\[P(\{a_{i}\}) = \frac{1}{n}, \forall a_{i} \in \Omega \] 
+		\end{Def}
+	
+		\begin{Propriete}
+			Si $\Omega$ est équiprobable, la probabilité d'un événement $A\subset \Omega$ contenant $n_{A}$ éléments est:
+			\[P(A) = \frac{1}{n} + ... + \frac{1}{n} = \frac{n_{A}}{n} = \frac{card(A)}{card(\Omega)}\]
+		\end{Propriete}
+	
+		\begin{Ex}
+			On lance un dé non truqué. \\
+			1. La probabilité d'obtenir 5 est : $P(5) = \frac{1}{6}$. \\
+			2. La probabilité d'obtenir un nombre pair est : $P(2)+P(4)+P(6) = \frac{3}{6} = \frac{1}{2}$.
+		\end{Ex}
+		
 
 \end{document}
