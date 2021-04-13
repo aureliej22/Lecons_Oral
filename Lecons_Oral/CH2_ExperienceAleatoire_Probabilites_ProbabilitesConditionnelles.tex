@@ -82,6 +82,14 @@
 		\end{Ex}
 	
 \section{Probabilités}
+	\subsection{Arbre des possibles}
+		\begin{Def}
+			L'\textbf{arbre des possibles} permet de visualiser les issues d'une expérience aléatoire. On peut y noter la probabilité de chaque issue sur chacune des branches.
+		\end{Def}
+	
+		\begin{Ex}
+			Lorsque l'on fait tourner une roue de la fortune on peut modéliser chacune des issues sur un arbre des possibles.
+		\end{Ex}
 	\subsection{Loi de probabilités sur un univers $\Omega$}
 	
 		\begin{Def}
@@ -150,6 +158,120 @@
 			1. La probabilité d'obtenir 5 est : $P(5) = \frac{1}{6}$. \\
 			2. La probabilité d'obtenir un nombre pair est : $P(2)+P(4)+P(6) = \frac{3}{6} = \frac{1}{2}$.
 		\end{Ex}
+	
+\section{Probabilité conditionnelle}
+	\subsection{Probabilité conditionnelle}
+	
+		\begin{Def}
+			Soit A et B deux événements avec $P(A) > 0$ et $A\subset \Omega$, on appelle \textbf{probabilité conditionnelle de B sachant A}, la probabilité que l'événement B se réalise sachant que l'événement A est réalisé. Cette probabilité conditionnelle à A est l'application $P_{A}(.)$ de l'ensemble des événements ($P(\Omega)$) dans $[0,1]$ telle que :
+			\[ \begin{array}{lll}
+					P_{A} : &P(\Omega) &\rightarrow [0,1] \\
+					&B &\mapsto P_{A}(B) = \frac{P(A\cap B)}{P(A)}
+				\end{array}
+			       \]
+		\end{Def}
+	
+		\begin{Ex}
+			On tire une carte au hasard dans un jeu de 32 cartes. \\
+			Soit A l'événement "Le résultat est un pique". \\
+			Soit B l'événement "Le résultat est un roi". \\
+			Donc $A\cap B$ est l'événement "Le résultat est le roi de pique". \\
+			Alors : $P(A) = \frac{8}{32} = \frac{1}{4}$ et $P(A\cap B) = \frac{1}{32}$. \\
+			Donc la probabilité que le résultat soit un roi sachant qu'on a tiré une carte pique est : 
+			\[P_{A}(B) = \frac{P(A\cap B)}{P(A)} = \frac{\frac{1}{32}}{\frac{1}{4}} = \frac{1}{8}\]
+		\end{Ex}
+	
+		\begin{Propriete}
+			Soit A et B deux événements avec $P(A)>0$, on a : \\
+			\begin{itemize}
+				\item $0 \leq P_{A}(B) \leq 1$
+				\item $P_{A}(\bar{B}) = 1-P_{A}(B)$
+				\item $P(A\cap B) = P_{A}(B) \times P(A) = P_{B}(A) \times P(B)$
+			\end{itemize}
+		\end{Propriete}
+	
+	\subsection{Probabilités totales et de Bayes}
+		\begin{Propriete}
+			\textbf{Formule des probabilités totales.} Soit $\{E_{1},...,E_{n}\}$ une partition de $\Omega$ d'événements non vides. Soit $A\subset \Omega$. Alors :
+			\[P(A) = \sum_{i=1}^{n} P_{E_{i}}(A) \times P(E_{i})\]
+		\end{Propriete}
 		
-
+		\begin{Ex}
+			On considère deux urnes $U_{1}$ et $U_{2}$. L'urne $U_{1}$ contient 6 boules noires et 4 boules blanches. L'urne $U_{2}$ contient 3 boules noires et 7 boules blanches. On lance un dé non truqué. S'il indique le chiffre 1, on choisit l'urne $U_{1}$ sinon on choisit l'urne $U_{2}$. On effectue ensuite deux tirages avec remise. On cherche la probabilité d'avoir tiré deux boules noires en tout. On note :
+			\[N = \{\text{noir au premier tirage}\}\]
+			\[N' = \{\text{noir au second tirage}\}\]
+			\[H_{1} = \{\text{choix de l'urne $U_{1}$}\}\]
+			\[H_{2} = \bar{H_{1}} = \{\text{choix de l'urne $U_{2}$}\}\]
+			On a ainsi :
+			\[P_{H_{1}}(N) = \frac{6}{10} = \frac{3}{5}\]
+			\[P_{H_{1}}(N\cap N') = (\frac{3}{5})^{2}\]
+			\[P_{H_{2}}(N) = \frac{3}{10}\]
+			\[P_{H_{2}}(N\cap N') = (\frac{3}{10})^{2}\]
+			La formule nous donne alors:
+			\[P(N) = P_{H_{1}}(N) \times P(H_{1}) + P_{H_{2}}(N) \times P(H_{2})\]
+			\[P(N) = \frac{1}{6} \times \frac{3}{5} + \frac{5}{6} \times \frac{3}{10} = \frac{1}{10} + \frac{1}{4} = \frac{7}{20}\]
+			\[P(N\cap N') = P_{H_{1}}(N\cap N') \times P(H_{1}) + P_{H_{2}}(N\cap N') \times P(H_{2})\]
+			\[P(N) = \frac{1}{6} \times (\frac{3}{5})^{2} + \frac{5}{6} \times (\frac{3}{10})^{2} = \frac{27}{200}\]
+			
+		\end{Ex}
+	
+		\begin{Propriete}
+			\textbf{Formule de Bayes.} Soit $\{E_{1},...,E_{n}\}$ une partition de $\Omega$ d'événements non vides. Soit $A\subset \Omega$. Alors : 
+			\[P_{A}(E_{i}) = \frac{P_{E_{i}}(A) \times P(E_{i})}{\sum_{i=1}^{n}P_{E_{i}}(A) \times P(E_{i}) }\]
+		\end{Propriete}
+	
+	\subsection{Indépendance}
+		\begin{Def}
+			Deux événements A et B sont \textbf{indépendants} si : \\
+			\begin{itemize}
+				\item $P(A\cap B) = P(A) \times P(B)$
+				\item $P_{A}(B) = P(B)$
+				\item $P_{B}(A) = P(A)$
+			\end{itemize}
+		\end{Def}
+	
+		\begin{Ex}
+			On tire une carte au hasard dans un jeu de 32 cartes. \\
+			Soit A l'événement "Le résultat est un trèfle". \\
+			Soit B l'événement "Le résultat est un roi". \\
+			Donc $A\cap B$ est l'événement "Le résultat est le roi de trèfle". \\
+			Alors : $P(A) = \frac{8}{32} = \frac{1}{4}$, $P(B) = \frac{4}{32} = \frac{1}{8}$ et $P(A\cap B) = \frac{1}{32}$. \\
+			On a donc : 
+			\[P(A) \times P(B) = \frac{1}{4} \times \frac{1}{8} = \frac{1}{32} = P(A\cap B)\]
+			Les événements A et B sont indépendants.
+		\end{Ex}
+	
+		\begin{Propriete}
+			Si A et B sont indépendants alors $\bar{A}$ et B sont indépendants.
+		\end{Propriete}	
+	
+		\begin{Proof}
+			\[P(\bar{A}\cap B) = P(B\cap \bar{A})\]
+			\[P(\bar{A}\cap B) = P(B) \times P_{B}(\bar{A})\]
+			\[P(\bar{A}\cap B) = P(B) \times (1 - P_{B}(A))\]
+			\[P(\bar{A}\cap B) = P(B) \times (1 - P(A)) \text{car A et B sont indépendants}\]
+			\[P(\bar{A}\cap B) = P(B) \times P(\bar{A})\]
+			Donc $\bar{A}$ et B sont indépendants.
+		\end{Proof}
+	
+	\subsection{Schéma de Bernoulli}
+		\begin{Def}
+			Toute expérience aléatoire conduisant à deux issues possibles S (Succès) et $\bar{S}$ (Echec) est appelée une \textbf{épreuve de Bernoulli}.
+		\end{Def}
+		\begin{Ex}
+			Si on appelle Succès lors d'un lancé d'un dé, l'événement noté : S = "Obtenir 6". Le lancer du dé peut alors être considéré comme une épreuve de Bernoulli avec :\begin{itemize}
+				\item $ S = \{6\}$ et $p = P(S) = \frac{1}{6}$.
+				\item $\bar{S} = \{1,2,3,4,5\}$ et $q = 1-p = \frac{5}{6}$.
+			\end{itemize}
+		\end{Ex}
+	
+		\begin{Def}
+			Si on répète $n$ fois et de façon indépendante une épreuve de Bernoulli, on obtient un \textbf{schéma de Bernoulli}.
+		\end{Def}
+	
+		\begin{Propriete}
+			Soit $0 \leq k \leq n$ avec $k,n \in \mathbb{N}$,
+			\[P(\text{"Obtenir k succès"}) = \binom{n}{k}p^{k}(1-p)^{n-k}\]
+		\end{Propriete}
+	
 \end{document}
