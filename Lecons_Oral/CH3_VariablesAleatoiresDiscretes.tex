@@ -1,0 +1,292 @@
+\documentclass[a4paper,12pt,final]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+
+\usepackage{fullpage}
+\usepackage[amsthm]{ntheorem}
+\usepackage{graphicx}
+
+\newtheorem{Ex}{Exemple}[section]
+\newtheorem{Proof}{Démonstration}[section]
+\theoremstyle{theorem}
+\newtheorem{Th}{Théorème}[section]
+\theoremstyle{definition}
+\newtheorem{Propriete}{Propriété}[section]
+\theoremstyle{definition}
+\newtheorem{Propos}{Proposition}[section]
+\theoremstyle{definition}
+\newtheorem{Def}{Définition}[section]
+
+\linespread{1.1}
+
+
+\title{CHAPITRE 3 : Variables aléatoires discrètes}
+\author{Aurélie \textsc{Jeanmougin}}
+
+\begin{document}
+	
+	\maketitle
+	
+\begin{tabular}{r | l}
+	Niveau & Terminal Spé Maths, Terminal math complémentaire, 1ere spé \\
+	Prérequis & Probabilités \\
+	Références & Sésamath Tspé, Tcomp, 1ere spé
+\end{tabular}
+
+\section{Loi de probabilité}
+	\subsection{loi de probabilité et fonction de répartition}
+
+	\begin{Def}
+		Soit $\Omega$ l'univers d'une expérience aléatoire. On définit une \textbf{loi de probabilité P} sur $\Omega$ en associant à chaque événement élémentaire $\omega_{i}$ une probabilité $p_{i} \in [0,1]$ tel que :
+		\[\sum_{i}p_{i} = 1\]
+		On peut aussi noter $p_{i} = P(\omega_{i})$.
+	\end{Def}
+
+	\begin{Ex}
+		On joue avec un dé truqué. La probabilité d'apparition de chaque face est donnée ci-dessous: \[
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline \textbf{Issue $\omega$} & 1 & 2 & 3 & 4 & 5 & 6 \\
+		\hline \textbf{Probabilité $P(\omega)$} & 0,05 & 0,2 & $\alpha$ & 0,1 & 0,25 & 0,1 \\
+		\hline
+		\end{tabular} \]
+		1. On veut calculer la probabilité de l'événement A : "Obtenir un nombre pair". D'après la définition on a :
+		\[P(A) = P(2)+P(4)+P(6) = 0,2+0,1+0,1 = 0,4.\]
+		2. On veut calculer la probabilité d'obtenir 3. On sait que :
+		\[P(1)+P(2)+P(3)+P(4)+P(5)+P(6) = 1\]
+		On a alors : 
+		\[P(3) = 1 - (P(1)+P(2)+P(4)+P(5)+P(6)) = 1-(0,05+0,2+0,1+0,25+0,1) = 0,3.\]
+	\end{Ex}
+
+	\begin{Def}
+		Une \textbf{variable aléatoire réelle X} sur $\Omega$ est une fonction qui à chaque issue de $\Omega$ associe un nombre réel. C'est donc l'application X : $\Omega \rightarrow \mathbb{R}$. On dit que la variable aléatoire est \textbf{discrète} lorsque $\Omega \subset \mathbb{N}$.
+	\end{Def}
+
+	\begin{Ex}
+		On lance trois fois une pièce non truquée et on compte le nombre de fois où on obtient "face". On définit ainsi une variable aléatoire $X : \Omega \rightarrow \mathbb{R}$ avec : 
+		\[\Omega = \{PPP,PPF,PFP,FPP,PFF,FPF,FFP,FFF\}\]
+		et $X(PPP) = 0$, $X(PPF) = 1$, $X(FPP) = 1$, $X(PFP) = 1$, $X(FFP) = 2$,
+		$X(FPF) = 2$, $X(PFF)= 2$, $X(FFF) = 3$.
+	\end{Ex}
+
+	\begin{Def}
+		Soit X une variable aléatoire. On appelle \textbf{fonction de répartition} de la variable X, la fonction F définie par : 
+		\[
+			\begin{array}{lll}
+				F: & \mathbb{R} & \rightarrow [0,1]	\\
+				& x & \mapsto F(x) = P(X \leq x)
+			\end{array}
+		\]
+	\end{Def}
+
+	\begin{Propriete}
+		La fonction de répartition est toujours une fonction croissante et bornée par 0 et 1.
+	\end{Propriete}	
+
+	\begin{Ex}
+		Avec l'exemple précédent sur le lancé de pièce trois fois, on a : \\
+		\begin{itemize}
+			\item Pour $x \in ]-\infty,0[$, on a : $F(x) = 0$. 
+			\item Pour $x \in ]0,1]$, on a : $F(x) = \frac{1}{8}$. 
+			\item Pour $x \in ]1,2]$, on a : $F(x) = \frac{1}{8} + \frac{3}{8} = \frac{1}{2}$.
+			\item Pour $x \in ]2,3]$, on a : $F(x) = \frac{1}{8} + \frac{3}{8} + \frac{3}{8} = \frac{7}{8}$.
+			\item Pour $x \in ]2,3]$, on a : $F(x) = \frac{1}{8} + \frac{3}{8} + \frac{3}{8} + \frac{1}{8} = 1$.
+			
+			La représentation graphique est une fonction en escalier.
+		\end{itemize}
+	\end{Ex}
+	
+	\subsection{Exercices}
+
+\section{Espérance mathématique, variance et écart-type}
+
+	\subsection{Espérance mathématique}
+	
+	\begin{Def}
+		Soient $\Omega$ l'univers correspondant à une expérience aléatoire, P une probabilité sur $\Omega$ et $X$ une variable aléatoire sur $\Omega$ telle que $X(\Omega)$ soit fini. On note $\{x_{1},...,x_{n}\}$ l'ensemble $X(\Omega)$. L'\textbf{espérance mathématique} de la variable $X$ est le nombre noté $E(X)$, définit par :
+		\[E(X) = \sum_{i=1}^{n} x_{i}p_{i} = x_{1}p_{1} + ... + x_{n}p_{n}\]
+		où $p_{i} = P(X=x_{i})$.
+	\end{Def}
+
+	\begin{Ex}
+		On reprend l'exemple de la pièce de monnaie. On a :
+		\[E(X) = \frac{1}{8} \times 0 + \frac{3}{8} \times 1 + \frac{3}{8} \times 2 + \frac{1}{8} \times 3 = \frac{3}{2}\]
+	\end{Ex}
+
+	\begin{Th}
+		Soient X et Y deux variables aléatoires définies sur le même univers $\Omega$ de cardinal fini. Soit P une probabilité sur $\Omega$. On a : 
+		\[E(X+Y) = E(X) + E(Y)\]
+		En particulier si $b$ est un réel :
+		\[E(X + b) = E(X) + b\]
+		\[E(bX) = bE(X)\]
+	\end{Th}
+
+	\begin{Proof}
+		On a : 
+		\[\begin{array}{ll}
+			E(X+Y) & = \sum_{\omega \in \Omega} (X + Y)(\omega)P(\omega) \\
+			& = \sum_{\omega \in \Omega} X(\omega)P(\omega) + \sum_{\omega \in \Omega} Y(\omega)P(\omega) = E(X) + E(Y)
+		\end{array}\]
+		En prenant Y constante égale à b, on obtient : 
+		\[E(X + b) = E(X) + E(b) = E(X) + b\]
+		De plus :
+		\[E(bX) = \sum_{i=1}^{n} kx_{i}p_{i} = k \times \sum_{i=1}^{n} x_{i}p_{i} = kE(X)\]			
+	\end{Proof}
+
+	\subsection{Variance et écart-type}
+	
+	\begin{Def}
+		Soient $\Omega$ l'univers correspondant à une expérience aléatoire, P une probabilité sur $\Omega$ et $X$ une variable al"atoire sur $\Omega$ telle que $X(\Omega)$ soit fini. On note $\{x_{1},...,x_{n}\}$ l'ensemble $X(\Omega)$. \\
+		\begin{itemize}
+			\item La \textbf{variance} de la variable aléatoire X est le nombre noté V(X), défini par :
+			\[V(X) = E((X - E(X))^{2}) = \sum_{i=1}^{n} p_{i}(x_{i} - E(X))^{2}\]
+			\item L'\textbf{écart-type} de la variable aléatoire X est le nombre, noté $\sigma (X)$ et défini par : 
+			\[\sigma (X) = \sqrt{V(X)}\]
+		\end{itemize}
+	
+		La variance est la moyenne des carrés des écart à la moyenne.
+	\end{Def}
+
+	\begin{Ex}
+		Sur le problème de la pièce de monnaie lancée 3 fois :
+		\[V(X) = \frac{1}{8}(0-\frac{3}{2})^{2} + \frac{3}{8}(1-\frac{3}{2})^{2} + \frac{3}{8}(2-\frac{3}{2})^{2} + \frac{1}{8}(3-\frac{3}{2})^{2} = \frac{3}{4}\]
+		\[\sigma (X) = \sqrt{\frac{3}{4}} = \frac{\sqrt{3}}{2}\]
+	\end{Ex}
+
+	\begin{Th}
+		\textbf{Formule de König-Huygens}. La variance de la variable aléatoire X peut se calculer avec la relation suivante : 
+		\[V(X) = E(X^{2}) - (E(X))^{2}\]
+		La variance est l'écart entre la moyenne des carrés et le carré de la moyenne.
+	\end{Th}
+
+	\begin{Proof}
+		\[V(X) = E((X-E(X))^{2}) = E(X^{2} - 2XE(X) + E(X)^{2}) = E(X^{2}) - 2E(X)E(X) + E(X)^{2}E(1)\]
+		D'où $V(X) = E(X^{2}) - (E(X))^{2}$
+	\end{Proof}	
+
+	\begin{Propriete}
+		Soit X une une variable aléatoire. Soient a et b deux réels. On a :
+		\[V(aX + b) = a^{2}V(X) \text{ et } \sigma(aX + b) = \lvert a \rvert \sigma(X)\]
+	\end{Propriete}
+
+	\begin{Proof}
+		\[V(aX + b) = E(a^{2}X^{2} + 2abX + b^{2}) - (E(aX+b))^{2}\]
+		D'après la linéarité de l'espérance : 
+		\[V(aX+b) = a^{2}E(X^{2}) + 2abE(X) + b^{2}) - (aE(X) + b)^{2}\] \[V(aX+b) = a^{2}E(X^{2}) + 2abE(X) + b^{2}) - a^{2}E(X)^{2} - 2abE(X) -b^{2} = a^{2}V(X) \]
+	\end{Proof}
+
+	\subsection{Exercices}
+	
+\section{Lois discrètes classiques}
+	\subsection{Loi uniforme}
+	
+	\begin{Def}
+		Une variable aléatoire X suit une \textbf{loi uniforme} sur $\{1;2;...;n\}$ si elle prend pour valeurs les entiers de 1 à n de manière équiprobable, c'est-à-dire si $P(X = k) = \frac{1}{n}$ pour tout entier k entre 1 et n.
+	\end{Def}
+
+	\begin{Propriete}
+		Pour X suivant la loi uniforme sur $\{1;2;...;n\}$, on a : 
+		\[E(X) = \frac{n+1}{2}\]
+		\[V(X) = \frac{n^{2} - 1}{12}\]
+	\end{Propriete}
+
+	\begin{Ex}
+		On lance un dé équilibré à huit faces numérotées de 1 à 8 et on considère la variable aléatoire X donnant le résultat obtenu. X suit la loi uniforme sur $\{1;2;3;4;5;6;7;8\}$. \\
+		Son espérance est $E(X) = \frac{1+8}{2}= \frac{9}{2}$ et sa variance est $V(X) = \frac{8^{2} - 1}{12} = \frac{21}{4}$
+	\end{Ex}
+
+	\subsection{Loi de Bernoulli}
+	
+	\begin{Def}
+		Toute expérience aléatoire conduisant à deux issues possibles S (Succès) et $\bar{S}$ (Echec) est appelée une \textbf{épreuve de Bernoulli}.
+	\end{Def}
+	\begin{Ex}
+		Si on appelle Succès lors d'un lancé d'un dé, l'événement noté : S = "Obtenir 6". Le lancer du dé peut alors être considéré comme une épreuve de Bernoulli avec :\begin{itemize}
+			\item $ S = \{6\}$ et $p = P(S) = \frac{1}{6}$.
+			\item $\bar{S} = \{1,2,3,4,5\}$ et $q = 1-p = \frac{5}{6}$.
+		\end{itemize}
+	\end{Ex}
+
+	\begin{Def}
+		Soit $p \in ]0;1[$. Soit la variable aléatoire X définie sur $\Omega = \{0,1\}$. On dit que X suit une \textbf{loi de Bernoulli de paramètre p}, noté $\mathbb{B} (p)$, si :
+			\[P(X= 0) = 1-p\]
+			\[P(X= 1) = p\]
+	\end{Def}
+
+	\begin{Propriete}
+		Pour X suivant $\mathbb{B} (p)$ on a : 
+		\[E(X) = p\]
+		\[V(X) = p(1-p)\]
+	\end{Propriete}
+
+	\begin{Ex}
+		On lance une pièce truquée de sorte que la probabilité d'obtenir "pile" est 0,1 et on regarde le nombre de "pile" obtenus. X suit la loi de Bernoulli de paramètre 0,1. \\
+		Son espérance est donc $E(X) = 0,1$ et sa variance est $V(X)=0,1 \times 0,9 = 0,09$.
+	\end{Ex}
+
+	\begin{Def}
+		Si on répète $n$ fois et de façon indépendante une épreuve de Bernoulli, on obtient un \textbf{schéma de Bernoulli}.
+	\end{Def}
+
+
+	\subsection{Loi binomiale}
+	
+	\begin{Def}
+		Soit $n \in \mathbb{N}*$ et $p \in ]0;1[$. On considère le schéma de bernoulli pour lequel $n$ est le nombre de répétitions et $p$ la probabilité d'un succès. La loi de la variable aléatoire X donnant le nombre de succès sur les n répétitions est appelée \textbf{loi binomiale de paramètre n et p} et se note $\mathbb{B} (n;p)$.
+	\end{Def}
+
+	\begin{Propriete}
+		Soit X une variable aléatoire suivant la loi binomiale $\mathbb{B} (n;p)$. \\
+		Pour tout entier k entre 0 et n, on a:
+		\[P(X=k) = \binom{n}{k} \times p^{k} \times (1-p)^{n-k}\]
+	\end{Propriete}
+
+	\begin{Ex}
+		On reprend l'exemple précédent et on lance deux fois successivement une pièce de monnaie truquée dont la probabilité de tomber sur "pile" est 0,4. X suit la loi binomiale $\mathbb{B} (2;0,4)$.\\
+		La probabilité d'obtenir pile est donc : 
+		\[P(X=1) = \binom{2}{1} \times 0,4^{1} \times 0,6^{2-1} = 2 \times 0,4 \times 0,6 = 0,48\]
+	\end{Ex}
+
+	\begin{Propriete}
+		Pour X suivant la loi binomiale $\mathbb{B} (n;p)$, on a : 
+		\[E(X) = np\]
+		\[V(X) = np(1-p)\]
+	\end{Propriete}
+
+	\subsection{Loi géométrique}
+	
+	\begin{Def}
+		On considère une épreuve de Bernoulli pour laquelle la probabilité d'un succès est p et on répète cette épreuve de Bernoulli de manière indépendante jusqu'à l'obtention d'un succès. \\
+		La variable aléatoire X donnant le nombre d'essais nécessaires pour obtenir ce succès suit une \textbf{loi géométrique de paramètre p}, notée $\mathbb{G} (p)$.
+	\end{Def}
+
+	\begin{Propriete}
+		Soit X une variable aléatoire suivant la loi $\mathbb{G} (p)$, et $k \in \mathbb{N}*$. On a : 
+		\[P(X=k) = (1-p)^{k-1} \times p \] 
+		\[P(X \leq k) = 1 - (1-p)^{k}\]
+		\[P(X>k) = (1-p)^{k}\]
+		\[E(X) = \frac{1}{p}\]
+		\[V(X) = \frac{1-p}{p^{2}}\]
+	\end{Propriete}
+
+	\begin{Ex}
+		On lance un dé équilibré à quatre faces numérotées de 1 à 4 jusqu'à l'obtention d'un 2. La variable aléatoire D donnant le nombre d'essais nécessaires pour obtenir un 2 suit la loi géométrique de paramètre p = 0,25. En effet, D donne le nombre de succès "obtenir 2" lorsqu'on réalise de manière indépendante une même expérience de Bernoulli dont la probabilité de succès est 0,25. \\
+		D suit la loi $\mathbb{G} (0,25)$ donc la probabilité qu'il faille cinq essais pour obtenir un 2 est : $P(D = 5) = (1-0,25)^{5-1} \times 0,25 = 0,75^{4} \times 0,25 \approx à,08$. \\
+		L'espérance de D est $E(D) = \frac{1}{0,25} = 4$.
+		
+	\end{Ex}
+
+	\begin{Propriete}
+		\textbf{Non vieillissement.} Pour X suivant une loi géométrique, on a $P_{X>s}(X>s+t) = P(X>t)$ pour tout $s,t\in \mathbb{N}*$.\\
+	\end{Propriete}
+
+	\begin{Ex}
+		Dans l'exemple précédent, la probabilité qu'il faille plus de dix essais pour obtenir un 2 sachant qu'après sept essais, on n'en a encore obtenu est : 
+		\[P_{D>7}(D>10) = P_{D>7}(D>7+3) = P(D>3) = (1-0,25)^{3} \approx 0,42\]
+	\end{Ex}
+
+	\subsection{Exercices}
+	
+\end{document}
