@@ -1,0 +1,191 @@
+\documentclass[a4paper,12pt,final]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+
+\usepackage{fullpage}
+\usepackage[amsthm]{ntheorem}
+\usepackage{graphicx}
+
+\newtheorem{Ex}{Exemple}[section]
+\newtheorem{Proof}{Démonstration}[section]
+\theoremstyle{theorem}
+\newtheorem{Th}{Théorème}[section]
+\theoremstyle{definition}
+\newtheorem{Propriete}{Propriété}[section]
+\theoremstyle{definition}
+\newtheorem{Propos}{Proposition}[section]
+\theoremstyle{definition}
+\newtheorem{Def}{Définition}[section]
+
+\linespread{1.1}
+
+
+\title{CHAPITRE 3 : Démonstrations à connaître}
+
+\DeclareUnicodeCharacter{2212}{-}
+\begin{document}
+	
+	\maketitle
+
+
+\section{Les suites}
+
+	\subsection{Unicité de la limite}
+
+\begin{Propriete}
+	Si $(u_{n})$ converge vers $\ell_{1}$ et si $(u_{n})$ converge vers $\ell_{2}$, alors $\ell_{1} = \ell_{2}$.
+\end{Propriete}
+
+\begin{Proof}
+	Raisonnons par l'absurde. Si $\ell_{1} \ne \ell_{2}$, il existe un intervalle ouvert I contenant $\ell_{1}$ et un intervalle ouvert J contenant $\ell_{2}$ tel que $I\cap J = \emptyset$. Puisque $(u_{n})$ converge vers $\ell_{1}$, il existe un entier $n_{1}$ tel que, pour $n_{1} \leq n$, $u_{n} \in I$. Puisque $(u_{n})$ converge vers $\ell_{2}$, il existe un entier $n_{2}$ tel que, pour $n_{2} \leq n$, $u_{n} \in J$. Posons $n=max(n_{1},n_{2})$. Alors $u_{n} \in I\cap J$ ce qui contredit que $I\cap J = \emptyset$.
+\end{Proof}
+
+	\subsection{Théorème des gendarmes}
+
+\begin{Th}
+	Si $(u_{n})$, $(v_{n})$ et $(w_{n})$ sont trois suites réelles telles que, pour tout entier $n$ assez grand, $u_{n} \leq v_{n} \leq w_{n}$ et si $(u_{n})$ et $(w_{n})$ convergent vers le même réel $\ell$, alors $(v_{n})$ converge vers $\ell$.
+\end{Th}
+
+\begin{Proof}
+	Soit I un intervalle ouvert contenant $\ell$. Alors il existe un entier $n_{1}$ tel que tous les termes de la suite $(u_{n})$, à partir de $n_{1}$, sont éléments de I. Il existe un entier $n_{2}$ tel que tous les termes de la suite $(w_{n})$, à partir de $n_{2}$, sont éléments de I. Puisque $v_{n}$ est compris entre $u_{n}$ et $w_{n}$, à partir du rang $n_{0}=max(n_{1},n_{2})$, tous les termes de la suite $(v_{n})$ sont dans I.
+\end{Proof}
+
+	\subsection{Limite et ordre}
+	
+\begin{Propriete}
+	Si $(u_{n})$ et $(v_{n})$ sont deux suites convergeant respectivement vers $\ell_{1}$ et $\ell_{2}$ et vérifiant, pour tout entier $n \in N$, $u_{n} \leq v_{n}$, alors $\ell_{1} \leq \ell_{2}$. 
+\end{Propriete}
+
+\begin{Proof}
+	Raisonnons par contraposée et prouvons que, si $\ell_{1} > \ell_{2}$, alors il existe un entier $n$ tel que $u_{n} > v_{n}$. Si $\ell_{1} > \ell_{2}$, alors il existe un intervalle ouvert $I=]a,b[$ contenant $\ell_{1}$ et un intervalle ouvert $J=]c,d[$ contenant $\ell_{2}$ tel que $d \leq a$ (faire un dessin sur la droite réelle, ou poser $\epsilon = (\ell_{1} − \ell_{2})/2$ et $I=]\ell_{1}−\epsilon,+\infty[$, $J=]−\infty,\ell_{2}+\epsilon[ $). Il existe un rang $n_{1}$ tel que, pour tout $n_{1}\leq n$, on a $u_{n} \in I$ et il existe un rang $n_{2}$ tel que, pour tout $n_{2}\leq n$, on a $v_{n} \in J$. En particulier, pour $n=max(n_{1},n_{2})$, on a $v_{n} < d \leq a < u_{n}$.
+\end{Proof}
+
+\begin{Propriete}
+	Si $(u_{n})$ est une suite croissante qui converge vers $\ell$, alors pour tout entier $n \in N$, on a $u_{n} \leq \ell$.
+\end{Propriete}
+
+\begin{Proof}
+	Raisonnons par l'absurde et supposons que ce ne soit pas le cas. Il existe donc un entier $n_{0}$ tel que $u_{n_{0}}> \ell$. Posons $I=]−\infty,u_{n_{0}}[$. I est un intervalle ouvert contenant $\ell$. Par définition de la limite d'une suite, I contient tous les termes de la suite $(u_{n})$ à partir d'un certain rang. Mais pour tout $n_{0} leq n$, on a $u_{n_{0}} \leq u_{n}$ et donc $u_{n}\notin I$. C'est une contradiction.
+	
+\end{Proof}
+
+\begin{Propriete}
+	Si $(u_{n})$ est une suite qui tend vers $\ell$ avec $\ell >0$, alors $u_{n}>0$ à partir d'un certain rang. 
+\end{Propriete}
+
+\begin{Proof}
+	Posons $I=]\ell/2,+\infty[$. Alors $\ell \in I$ et puisque $(u_{n})$ converge vers $\ell$, tous les termes de un sont éléments de I à partir d'un certain rang. Ainsi, à partir d'un certain rang, $0 \leq \ell/2 < u_{n}$.
+\end{Proof}
+	
+	\subsection{Suite croissante et majorée}
+	
+\begin{Propriete}
+	Si $(u_{n})_{n \in N}$ est une suite croissante et majorée, alors elle est convergente. 
+\end{Propriete}
+
+\begin{Proof}
+	Ce théorème, sans doute l'un des plus importants de l'analyse, n'est pas accessible à l'aide d'outils de Terminale S. Il reste néanmoins indispensable de connaître sa preuve. Elle est basée sur la propriété suivante : si A est une partie de $\mathbb{R}$ non vide et majorée, alors A admet une borne supérieure. Rappelons que $\ell$ est la borne supérieure d'une partie A lorsque les deux propriétés suivantes sont vraies : \\
+	\begin{itemize}
+		\item Pour tout réel $x \in A$, on a $x \leq \ell$ ($\ell$
+		est un majorant de A).
+		\item Pour tout $\epsilon>0$, il existe $x \in A$ tel que $\ell−\epsilon \leq x \leq \ell$ (c'est le plus petit). 
+	\end{itemize}
+	
+	Dans notre cas, on va appliquer ceci à l'ensemble $A={u_{n}; n \in \mathbb{N}}$. A est non vide, et A est majoré. Notons $\ell$ sa borne supérieure et prouvons que $(u_{n})_{n \in \mathbb{N}}$ converge vers $\ell$. On va se ramener à la définition d'une suite convergente. Fixons $\epsilon>0$ et prouvons que tous les termes de la suite, à partir d'un certain rang, sont dans l'intervalle $[\ell−\epsilon,\ell+\epsilon]$. La deuxième partie de la propriété de la borne supérieure nous dit qu'il existe au moins un terme dans cet intervalle : il existe $N \in \mathbb{N}$ tel que $\ell−\epsilon \leq u_{N} \leq \ell$. La croissance de $(u_{n})$ nous donne alors que tous les termes à partir de celui de rang N conviennent. En effet, pour $N \leq n$, on a $\ell−\epsilon \leq u_{N} \leq u_{n}$ et aussi $u_{n} \leq \ell$ car $\ell$ est un majorant de $(u_{n})$. On a donc bien, pour tout $n\geq N$, $\ell−\epsilon \leq u_{n} \leq \ell+\epsilon$ et donc la suite $(u_{n})$ converge vers $\ell$.
+\end{Proof}
+
+
+	\subsection{Suite croissante non majorée}
+	
+\begin{Propriete}
+	Une suite croissante non majorée tend vers $+\infty$.
+\end{Propriete}
+
+\begin{Proof}
+	Soit $A>0$. Alors, puisque $(u_{n})$ n'est pas majorée, il existe un entier $n_{0}$ tel que $u_{n_{0}} \geq A$. Puisque $(u_{n})$ est croissante, pour tout entier $n \geq n_{0}$, on a $u_{n} \geq u_{n_{0}} \geq A$. Ceci signifie exactement que $(u_{n})$ tend vers $+\infty$.
+\end{Proof}
+
+	\subsection{Fonction continue et limite de suites}
+	
+\begin{Propriete}
+Soit $f:\mathbb{R} \rightarrow \mathbb{R}$ une fonction continue et $(u_{n})$ une suite convergeant vers $\ell$. Alors $(f(u_{n}))$ converge vers $f(\ell)$.
+\end{Propriete}
+
+\begin{Proof}
+	Cette démonstration n'est pas accessible en Terminale, car on ne dispose pas de la notion de continuité et de limite de fonctions avec des quantificateurs. Il s'agit ici d'un problème de "double limite". Soit $\epsilon>0$. Puisque f est continue en $\ell$, il existe un réel $\delta>0$ tel que $|x−\ell|< \delta \Rightarrow |f(x)−f(\ell)|< \epsilon$. Puisque $(u_{n})$ converge vers $\ell$, il existe un entier $n_{0}$ tel que $n\geq n_{0} \Rightarrow |u_{n}−\ell|< \delta$. Couplant ces deux propriétés, on trouve que $n\geq n_{0} \Rightarrow |f(u_{n})−f(\ell)|< \epsilon$. C'est exactement l'écriture (avec des quantificateurs) du fait que ($f(u_{n}))$ converge vers f($\ell$).
+\end{Proof}
+
+	\subsection{Inégalité de Bernoulli}
+	
+\begin{Propriete}
+	Pour tout $x>−1$ et tout $n \in \mathbb{N}$, on a $(1+x)^{n} \geq 1+nx$.
+\end{Propriete} 
+
+\begin{Proof}
+	on fixe $x>−1$ et on considère, pour $n \in \mathbb{N}$, la proposition suivante : $P(n)="(1+x)^{n} \geq 1+nx"$. Démontrons par récurrence sur $n \in \mathbb{N}$ cette propriété. \\
+	
+	\textbf{Initialisation} : On a $(1+x)^{0}=1$ et $1+0x=1$. La propriété $P(0)$ est donc vraie. \\
+	
+	\textbf{Hérédité} : Soit $n \in \mathbb{N}$ tel que $P(n)$ soit vrai. Alors, on écrit que $(1+x)^{n+1}=(1+x)^{n}(1+x)$ et on utilise l'hypothèse de récurrence. Puisque $1+x>0$, les inégalités ne changent pas de signe et on obtient donc $(1+x)^{n+1} \geq (1+nx)(1+x)=1+(n+1)x+nx^{2} \geq 1+(n+1)x$. Ceci démontre que $P(n+1)$ est vraie. \\
+	
+	Par le principe de récurrence, la propriété $P(n)$ est vraie pour tout entier $n$.
+\end{Proof}
+
+	\subsection{Comportement des suites géométriques}
+	
+\begin{Propriete}
+	Soit $q \in \mathbb{R}$. Alors la suite $(q^{n})$
+	\begin{itemize}
+		\item tend vers $+\infty$ si $q>1$.
+		\item est constante égale à 1 si $q=1$.
+		\item tend vers 0 si $q \in ]−1,1[$.
+		\item prend successivement les valeurs $+1$ et $−1$ si $q=−1$. En particulier, elle diverge.
+		\item prend successivement des valeurs positives et négatives si $q<−1$ avec $(|q|^{n})$ qui tend vers $+\infty$. En particulier, $(q^{n})$ diverge. 
+	\end{itemize}
+
+\end{Propriete}
+
+\begin{Proof}
+	Remarquons d'abord que l'énoncé est clair si $q=−1$,$0$ ou $1$ et nous exclurons désormais ces trois cas. Supposons ensuite que $q>1$. La preuve s'appuie sur l'inégalité de Bernoulli, en remarquant que $q^{n}=(1+(q−1))^{n} \geq 1+n(q−1)$. \\
+	Puisque $q−1>0$, $1+n(q−1)$ tend vers $+\infty$. Par comparaison, il en est de même de la suite $(q^{n})$.\\
+	
+	Supposons maintenant $q \in ]−1,1[$ avec $q \neq 0$ et posons $\rho=\frac{1}{|q|}$. Alors $\rho>1$ et $(\rho^{n})$ tend vers $+\infty$. Mais on peut écrire $|q^{n}|=\frac{1}{\rho^{n}}$. \\
+	Par les opérations sur les limites de suite, ceci entraine que $(|q|^{n})$, et donc que $(q^{n})$, tend vers 0. \\
+	
+	Enfin, si $q<−1$, il est clair que $q^{n}$ est positif si $n$ est pair et négatif si $n$ est impair. Puisque $|q|>1$, la suite $(|q^{n}|)$ tend vers $+\infty$. \\
+	
+	On peut aussi se passer de l'inégalité de Bernoulli en démontrant d'abord que la suite $(q^{n})$ tend vers 0 lorsque $q \in ]0,1[$. Notons en effet pour $n \geq 0$, $u_{n}=q^{n}$. Alors $(u_{n})$ est une suite strictement positive (évident) et décroissante : 
+	\[u_{n}+1−u_{n}=q^{n}(q−1)<0\]. 
+	Elle est donc décroissante et minorée, donc convergente. Notons $\ell$ sa limite. Puisque $u_{n+1}=qu_{n}$, $\ell$ vérifie $\ell=q\ell$ ce qui entraine, puisque $q\neq 1$, $\ell=0$. On peut alors retrouver le comportement de $(q^{n})$ pour les autres valeurs de $q$ en procédant comme ci-dessus.
+\end{Proof}
+
+	\subsection{Monotonie des suites recurrentes}
+	
+\begin{Propriete}
+	Si $f:\mathbb{R} \rightarrow \mathbb{R}$ est une fonction croissante, alors toute suite récurrente définie par $u_{0} \in \mathbb{R}$ et $u_{n+1}=f(u_{n})$ pour $n \in \mathbb{N}$ est monotone. Le sens de monotonie de $(u_{n})$ est donné par le signe de $u_{0}−u_{1}$. 
+\end{Propriete}
+
+\begin{Proof}
+	Sans perte de généralité, on peut supposer que $u_{1} \geq u_{0}$. Démontrons par récurrence sur $n \in \mathbb{N}$ la propriété $P(n)$ suivante : $P(n)="u_{n}+1 \geq u_{n}"$. \\
+	\textbf{Initialisation }: $P(0)$ est vraie.\\
+	
+	\textbf{Hérédité} : Soit $n \in \mathbb{N}$ tel que $P(n$) est vraie. Alors on a $u_{n+1} \geq u_{n}$. Puisque f est croissante, on en déduit que $f(u_{n+1}) \geq f(u_{n})$ c'est-à-dire $u_{n+2} \geq u_{n+1}$. La propriété $P(n+1)$ est donc vraie. \\
+	
+	Par le principe de récurrence, $P(n)$ est vraie pour tout entier $n$ et on a bien démontré que la suite $(u_{n})$ est croissante.
+\end{Proof}
+
+	\subsection{Suites adjacentes}
+	
+\begin{Propriete}
+	Si $(u_{n})$ et $(v_{n})$ sont deux suites adjacentes, alors elles convergent vers la même limite.
+\end{Propriete}
+
+\begin{Proof}
+	On commence par démontrer que les hypothèses entrainent que, pour tout $n \in \mathbb{N}$, on a $u_{n} \leq v_{n}$. Pour cela, on remarque que la suite $(v_{n}−u_{n})$ est décroissante et tend vers 0. Tous les termes de cette suite sont donc supérieurs à sa limite, c'est-à-dire que, pour tout $n \in \mathbb{N}$, $v_{n}−u_{n} \geq 0$. \\
+	
+	Puisque $(u_{n})$ est une suite croissante, il suffit de démontrer qu'elle est majorée pour prouver qu'elle converge. Mais, pour tout $n \in \mathbb{N}$, $u_{n} \leq v_{n} \leq v_{0} $(puisque $(v_{n})$ est décroissante). Ainsi, $(u_{n})$ est une suite croissante et majorée, elle converge. Notons $\ell_{1}$ sa limite. De même, l'inégalité, valable pour tout $n \in \mathbb{N}$, $u_{0} \leq u_{n} \leq v_{n}$ prouve que $(v_{n})$ est une suite minorée. Comme elle est décroissante, elle converge et notons $\ell_{2}$ sa limite. Alors, $(u_{n}−v_{n})$ tend vers $\ell_{1}-\ell_{2}$. Mais on sait que $(u_{n}−v_{n})$ tend vers 0. Par unicité de la limite d'une suite, $\ell_{1}=\ell_{2}$.
+\end{Proof}
+\end{document}
